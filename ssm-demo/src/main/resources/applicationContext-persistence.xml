@@ -10,14 +10,14 @@
     <!-- MyBatis -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="hikariDataSource"/>
-        <property name="typeAliasesPackage" value="com.andyadc.codeblocks"/>
+        <property name="typeAliasesPackage" value="com.andyadc.ssm"/>
         <property name="typeAliasesSuperType" value="com.andyadc.ssm.common.BaseEntity"/>
         <property name="mapperLocations" value="classpath:/mappings/**/*Mapper.xml"/>
         <property name="configLocation" value="classpath:/mybatis-config.xml"/>
     </bean>
 
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.andyadc.codeblocks"/>
+        <property name="basePackage" value="com.andyadc.ssm"/>
         <property name="annotationClass" value="org.apache.ibatis.annotations.Mapper"/>
     </bean>
 
