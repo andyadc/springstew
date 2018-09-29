@@ -26,7 +26,9 @@
         where id = #{id,jdbcType=BIGINT}
     </delete>
 
-    <insert id="insert" parameterType="com.andyadc.ssm.entity.Demo">
+    <insert id="insert" parameterType="com.andyadc.ssm.entity.Demo"
+            useGeneratedKeys="true"
+            keyProperty="id">
         insert into ssm_demo (id, `name`, `status`,
         version, created_time, updated_time
         )
@@ -35,7 +37,9 @@
         )
     </insert>
 
-    <insert id="insertSelective" parameterType="com.andyadc.ssm.entity.Demo">
+    <insert id="insertSelective" parameterType="com.andyadc.ssm.entity.Demo"
+            useGeneratedKeys="true"
+            keyProperty="id">
         insert into ssm_demo
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

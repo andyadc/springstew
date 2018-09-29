@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Date;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author andy.an
@@ -24,7 +25,7 @@ public class DemoServiceTest {
     @Test
     public void testAdd() {
         DemoDTO dto = new DemoDTO();
-        dto.setName("abc");
+        dto.setName("u" + ThreadLocalRandom.current().nextInt());
         dto.setCreatedTime(new Date());
         dto.setUpdatedTime(new Date());
         demoService.add(dto);

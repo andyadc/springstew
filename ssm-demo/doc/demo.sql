@@ -13,7 +13,7 @@ CREATE TABLE `ssm_demo` (
   COMMENT '用户名',
   `status`       TINYINT(2)          NOT NULL
   COMMENT '状态',
-  `version`      INT(11)    UNSIGNED          DEFAULT '1'
+  `version`      INT(11)    UNSIGNED          DEFAULT '0'
   COMMENT '版本号',
   `created_time` DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP
   COMMENT '创建时间',
