@@ -19,9 +19,8 @@ public class DemoDTO {
 
     private int status;
 
-    private Date createdTime;
+    private Date createTime;
 
-    private Date updatedTime;
-
+    private Date updateTime;
 
 }

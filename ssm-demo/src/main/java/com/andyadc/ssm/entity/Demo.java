@@ -10,13 +10,15 @@ public class Demo extends BaseEntity {
 
     private String name;
 
+    private int type;
+
     private int status;
 
     private Integer version;
 
-    private Date createdTime;
+    private Date createTime;
 
-    private Date updatedTime;
+    private Date updateTime;
 
     public String getName() {
         return name;
@@ -24,6 +26,14 @@ public class Demo extends BaseEntity {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getStatus() {
@@ -42,19 +52,19 @@ public class Demo extends BaseEntity {
         this.version = version;
     }
 
-    public Date getCreatedTime() {
-        return createdTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getUpdatedTime() {
-        return updatedTime;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdatedTime(Date updatedTime) {
-        this.updatedTime = updatedTime;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

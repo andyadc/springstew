@@ -1,6 +1,7 @@
 package com.andyadc.ssm.test;
 
-import com.andyadc.ssm.dto.DemoDTO;
+import com.andyadc.ssm.entity.Demo;
+import com.andyadc.ssm.mapper.DemoMapper;
 import com.andyadc.ssm.service.DemoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -20,14 +23,29 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DemoServiceTest {
 
     @Autowired
+    private DemoMapper demoMapper;
+    @Autowired
     private DemoService demoService;
 
     @Test
+    public void testQuery() {
+
+//        List<Demo> demos = demoMapper.selectByTypeList(Arrays.asList(1, 3));
+        List<Demo> demos = demoMapper.selectByTypeArray(new Integer[]{1, 2});
+
+        for (Demo demo : demos) {
+            System.out.println(Objects.toString(demo));
+        }
+    }
+
+    @Test
     public void testAdd() {
-        DemoDTO dto = new DemoDTO();
-        dto.setName("u" + ThreadLocalRandom.current().nextInt());
-        dto.setCreatedTime(new Date());
-        dto.setUpdatedTime(new Date());
-        demoService.add(dto);
+        Demo demo = new Demo();
+        demo.setName("u" + ThreadLocalRandom.current().nextInt());
+        demo.setStatus(2);
+        demo.setType(2);
+        demo.setCreateTime(new Date());
+        demo.setUpdateTime(new Date());
+        demoService.add(demo);
     }
 }

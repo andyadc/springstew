@@ -1,9 +1,7 @@
 package com.andyadc.ssm.service;
 
-import com.andyadc.ssm.dto.DemoDTO;
 import com.andyadc.ssm.entity.Demo;
 import com.andyadc.ssm.mapper.DemoMapper;
-import com.andyadc.ssm.util.BeanCopier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +21,9 @@ public class DemoService {
     private DemoMapper demoMapper;
 
     @Transactional(rollbackFor = Exception.class)
-    public void add(DemoDTO dto) {
-
-        Demo demo = new Demo();
-        BeanCopier.copy(dto, demo);
-
+    public void add(Demo demo) {
         demoMapper.insertSelective(demo);
         logger.info("demo id: {}", demo.getId());
     }
 
-    public void query() {
-
-    }
 }

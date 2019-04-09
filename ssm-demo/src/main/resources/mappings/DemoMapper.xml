@@ -4,15 +4,39 @@
     <resultMap id="BaseResultMap" type="com.andyadc.ssm.entity.Demo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="type" jdbcType="TINYINT" property="type"/>
         <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="version" jdbcType="INTEGER" property="version"/>
-        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
-        <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, `name`, `status`, version, created_time, updated_time
+        id, `name`, type, `status`, version, create_time, update_time
     </sql>
+
+    <select id="selectByTypeList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from ssm_demo
+        where type IN
+        <foreach collection="list" item="type" index="index" open="(" close=")" separator=",">
+            #{type}
+        </foreach>
+    </select>
+
+    <select id="selectByTypeArray" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from ssm_demo
+        where type IN
+        <foreach collection="array" item="type" index="index" open="(" close=")" separator=",">
+            #{type}
+        </foreach>
+    </select>
+
+    <!--
+    -->
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -26,17 +50,6 @@
         where id = #{id,jdbcType=BIGINT}
     </delete>
 
-    <insert id="insert" parameterType="com.andyadc.ssm.entity.Demo"
-            useGeneratedKeys="true"
-            keyProperty="id">
-        insert into ssm_demo (id, `name`, `status`,
-        version, created_time, updated_time
-        )
-        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT},
-        #{version,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}
-        )
-    </insert>
-
     <insert id="insertSelective" parameterType="com.andyadc.ssm.entity.Demo"
             useGeneratedKeys="true"
             keyProperty="id">
@@ -48,15 +61,18 @@
             <if test="name != null">
                 `name`,
             </if>
+            <if test="type != null">
+                type,
+            </if>
             `status`,
             <if test="version != null">
                 version,
             </if>
-            <if test="createdTime != null">
-                created_time,
+            <if test="createTime != null">
+                create_time,
             </if>
-            <if test="updatedTime != null">
-                updated_time,
+            <if test="updateTime != null">
+                update_time,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -66,15 +82,18 @@
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
             </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
             #{status,jdbcType=TINYINT},
             <if test="version != null">
                 #{version,jdbcType=INTEGER},
             </if>
-            <if test="createdTime != null">
-                #{createdTime,jdbcType=TIMESTAMP},
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updatedTime != null">
-                #{updatedTime,jdbcType=TIMESTAMP},
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
@@ -85,29 +104,23 @@
             <if test="name != null">
                 `name` = #{name,jdbcType=VARCHAR},
             </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
             <if test="status != null">
                 `status` = #{status,jdbcType=TINYINT},
             </if>
             <if test="version != null">
                 version = #{version,jdbcType=INTEGER},
             </if>
-            <if test="createdTime != null">
-                created_time = #{createdTime,jdbcType=TIMESTAMP},
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updatedTime != null">
-                updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.andyadc.ssm.entity.Demo">
-        update ssm_demo
-        set `name` = #{name,jdbcType=VARCHAR},
-        `status` = #{status,jdbcType=TINYINT},
-        version = #{version,jdbcType=INTEGER},
-        created_time = #{createdTime,jdbcType=TIMESTAMP},
-        updated_time = #{updatedTime,jdbcType=TIMESTAMP}
-        where id = #{id,jdbcType=BIGINT}
-    </update>
 </mapper>
