@@ -18,7 +18,7 @@
     <select id="selectByTypeList" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
-        from ssm_demo
+        from demo
         where type IN
         <foreach collection="list" item="type" index="index" open="(" close=")" separator=",">
             #{type}
@@ -28,7 +28,7 @@
     <select id="selectByTypeArray" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
-        from ssm_demo
+        from demo
         where type IN
         <foreach collection="array" item="type" index="index" open="(" close=")" separator=",">
             #{type}
@@ -41,19 +41,19 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from ssm_demo
+        from demo
         where id = #{id,jdbcType=BIGINT}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from ssm_demo
+        delete from demo
         where id = #{id,jdbcType=BIGINT}
     </delete>
 
     <insert id="insertSelective" parameterType="com.andyadc.ssm.entity.Demo"
             useGeneratedKeys="true"
             keyProperty="id">
-        insert into ssm_demo
+        insert into demo
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -99,7 +99,7 @@
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.andyadc.ssm.entity.Demo">
-        update ssm_demo
+        update demo
         <set>
             <if test="name != null">
                 `name` = #{name,jdbcType=VARCHAR},

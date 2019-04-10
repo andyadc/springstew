@@ -5,8 +5,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- 2018-9-28
 -- ----------------------------
 
-DROP TABLE IF EXISTS `ssm_demo`;
-CREATE TABLE `ssm_demo` (
+DROP TABLE IF EXISTS `demo`;
+CREATE TABLE `demo` (
   `id`          BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT
   COMMENT '主键',
   `name`        VARCHAR(50)         NOT NULL
