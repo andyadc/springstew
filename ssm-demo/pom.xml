@@ -14,16 +14,16 @@
     <properties>
         <webserver.port>9999</webserver.port>
 
-        <spring.version>5.1.5.RELEASE</spring.version>
+        <spring.version>5.1.7.RELEASE</spring.version>
         <aspectj.version>1.9.3</aspectj.version>
         <mybatis.version>3.5.1</mybatis.version>
         <mybatis-spring.version>2.0.1</mybatis-spring.version>
-        <mysql-driver.version>8.0.15</mysql-driver.version>
+        <mysql-driver.version>8.0.16</mysql-driver.version>
         <hikaricp.version>3.3.1</hikaricp.version>
-        <cglib.version>3.2.10</cglib.version>
-        <lombok.version>1.18.6</lombok.version>
+        <cglib.version>3.2.12</cglib.version>
+        <lombok.version>1.18.8</lombok.version>
 
-        <jackson.version>2.9.8</jackson.version>
+        <jackson.version>2.9.9</jackson.version>
         <slf4j.version>1.7.26</slf4j.version>
         <logback.version>1.2.3</logback.version>
         <junit.version>4.12</junit.version>
@@ -171,7 +171,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.15.v20190215</version>
+                <version>9.4.18.v20190429</version>
                 <configuration>
                     <reload>manual</reload>
                     <httpConnector>
