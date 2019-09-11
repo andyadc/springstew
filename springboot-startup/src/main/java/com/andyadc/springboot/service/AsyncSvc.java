@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * andy.an
  */
 @Service
-public class AsyncSvc {
+public class AsyncSvc implements Interface {
 
     private static final Logger logger = LoggerFactory.getLogger(AsyncSvc.class);
 

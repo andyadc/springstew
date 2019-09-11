@@ -17,7 +17,7 @@ public class BizSvc {
     private static final Logger logger = LoggerFactory.getLogger(BizSvc.class);
 
     @Autowired
-    private AsyncSvc asyncSvc;
+    private Interface asyncSvc;
 
     public void bizNotify() {
         Instant now = Instant.now();
