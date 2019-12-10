@@ -14,10 +14,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 public class TaskExecutorConfig {
 
-    @Bean("notifyTaskExecutor")
+    @Bean("defaultTaskExecutor")
     public ThreadPoolTaskExecutor notifyTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setThreadNamePrefix("NotifyTask-");
+        executor.setThreadNamePrefix("DefaultTask-");
         executor.setCorePoolSize(4);
         executor.setMaxPoolSize(8);
         executor.setQueueCapacity(100);
