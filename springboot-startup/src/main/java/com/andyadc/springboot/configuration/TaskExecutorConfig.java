@@ -23,7 +23,6 @@ public class TaskExecutorConfig {
         executor.setQueueCapacity(100);
         executor.setKeepAliveSeconds(60);
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-        executor.initialize();
         return executor;
     }
 }
