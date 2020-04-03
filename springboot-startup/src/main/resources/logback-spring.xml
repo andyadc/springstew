@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="false" scanPeriod="60 seconds" debug="true">
-    <property name="context.name" value="spring-boot-startup"/>
+    <property name="CONTEXT_NAME" value="spring-boot-startup"/>
 
-    <contextName>${context.name}</contextName>
-    <property name="log.path" value="/opt/logs/${context.name}"/>
+    <contextName>${CONTEXT_NAME}</contextName>
+    <property name="LOG_PATH" value="/opt/logs/${CONTEXT_NAME}"/>
 
     <!--<include resource="org/springframework/boot/logging/logback/base.xml" />-->
 
@@ -38,14 +38,14 @@
 
     <!-- Output to File -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/${context.name}.log</file>
+        <file>${LOG_PATH}/${CONTEXT_NAME}.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- daily rollover -->
             <fileNamePattern>
-                ${log.path}/${context.name}-%d{yyyy-MM-dd}.%i.log
+                ${LOG_PATH}/${CONTEXT_NAME}-%d{yyyy-MM-dd}.%i.log
             </fileNamePattern>
             <!-- each file should be at most 10MB, keep 30 days worth of history, but at most 20GB -->
             <maxHistory>30</maxHistory>
@@ -59,10 +59,10 @@
     </appender>
 
     <springProfile name="dev">
-        <logger name="com.andyadc" level="debug"/>
+        <logger name="com.andyadc" level="DEBUG"/>
     </springProfile>
 
-    <root level="info">
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>
