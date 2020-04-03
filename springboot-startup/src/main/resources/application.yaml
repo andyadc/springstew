@@ -3,10 +3,9 @@ server:
     uri-encoding: utf-8
   compression:
     enabled: true
-
 spring:
   profiles:
-    active: prod
+    active: dev
 
   http:
     encoding:
@@ -17,3 +16,6 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+
+  main:
+    banner-mode: console
