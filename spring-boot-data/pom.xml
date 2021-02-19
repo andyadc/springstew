@@ -24,6 +24,7 @@
 
     <modules>
         <module>jpa</module>
+        <module>jdbc</module>
     </modules>
 
 </project>

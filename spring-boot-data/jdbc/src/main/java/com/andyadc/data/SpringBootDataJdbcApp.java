@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootDataJpaApp {
+public class SpringBootDataJdbcApp {
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootDataJpaApp.class, args);
+        SpringApplication.run(SpringBootDataJdbcApp.class, args);
     }
 }
