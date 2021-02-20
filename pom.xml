@@ -19,6 +19,7 @@
     <modules>
         <module>package-to-war</module>
         <module>spring-boot-data</module>
+        <module>log</module>
     </modules>
 
 </project>
