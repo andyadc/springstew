@@ -25,6 +25,7 @@
     <modules>
         <module>jpa</module>
         <module>jdbc</module>
+        <module>mybatis</module>
     </modules>
 
 </project>

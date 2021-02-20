@@ -1,14 +1,13 @@
 package com.andyadc.data;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * <url>https://ordina-jworks.github.io/java/2020/01/02/Spring-Data-Jdbc.html</url>
- */
+@MapperScan({"com.andyadc.data.mapper"})
 @SpringBootApplication
-public class SpringBootDataJdbcApp {
+public class SpringBootDataMyBatisApp {
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootDataJdbcApp.class, args);
+        SpringApplication.run(SpringBootDataMyBatisApp.class, args);
     }
 }
