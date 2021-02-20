@@ -24,7 +24,8 @@ public class RepositoryTests {
 
     @Test
     public void testEmployeeRepository() {
-        employeeRepository.count();
+        System.out.println(employeeRepository.count());
+        System.out.println(employeeRepository.countEmployeeByCompanyId(3L));
     }
 
     @Test
