@@ -1,0 +1,28 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>用户中心 | Spring Security Demos</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body style="background-color: #f1f1f1; padding-bottom: 0">
+
+<div th:insert="~{header :: nav}"></div>
+
+<div class="container" style="margin-top: 60px">
+
+    <div style="text-align: center; margin-top: 10%">
+        <img alt="avatar" class="img-circle"
+             src="https://himg.bdimg.com/sys/portrait/item/pp.1.bfbf757b.p2d7awJkw25jml0ngFRQ7Q" style="margin: 0 auto">
+        <p style="margin-top: 25px; font-size: 20px; color: crimson" th:text="${username}">Andy</p>
+        <form method="post" th:action="@{/logout}">
+            <button class="btn btn-danger" style="margin-top: 20px">退出登录</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+
+</html>
