@@ -5,6 +5,9 @@ import com.andyadc.bms.security.RestAuthenticationEntryPoint;
 import com.andyadc.bms.security.auth.ajax.AjaxAwareAuthenticationFailureHandler;
 import com.andyadc.bms.security.auth.ajax.AjaxAwareAuthenticationSuccessHandler;
 import com.andyadc.bms.security.auth.ajax.AjaxLoginProcessingFilter;
+import com.andyadc.bms.security.auth.jwt.JwtTokenAuthenticationProcessingFilter;
+import com.andyadc.bms.security.auth.jwt.SkipPathRequestMatcher;
+import com.andyadc.bms.security.auth.jwt.extractor.TokenExtractor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -40,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private AuthenticationManager authenticationManager;
 
+    private TokenExtractor tokenExtractor;
     private ObjectMapper objectMapper;
 
     @Autowired
@@ -67,8 +71,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.objectMapper = objectMapper;
     }
 
+    @Autowired
+    public void setTokenExtractor(TokenExtractor tokenExtractor) {
+        this.tokenExtractor = tokenExtractor;
+    }
+
     protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter(String loginEntryPoint) throws Exception {
         AjaxLoginProcessingFilter filter = new AjaxLoginProcessingFilter(loginEntryPoint, authenticationSuccessHandler, authenticationFailureHandler, objectMapper);
+        filter.setAuthenticationManager(this.authenticationManager);
+        return filter;
+    }
+
+    protected JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter(List<String> pathsToSkip, String pattern) throws Exception {
+        SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(pathsToSkip, pattern);
+        JwtTokenAuthenticationProcessingFilter filter
+                = new JwtTokenAuthenticationProcessingFilter(matcher, authenticationFailureHandler, tokenExtractor);
         filter.setAuthenticationManager(this.authenticationManager);
         return filter;
     }
@@ -103,7 +120,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        super.configure(auth);
+
     }
 
     @Bean
