@@ -2,7 +2,13 @@ package com.andyadc.bms.security.config;
 
 import com.andyadc.bms.security.CustomCorsFilter;
 import com.andyadc.bms.security.RestAuthenticationEntryPoint;
+import com.andyadc.bms.security.auth.ajax.AjaxAwareAuthenticationFailureHandler;
+import com.andyadc.bms.security.auth.ajax.AjaxAwareAuthenticationSuccessHandler;
+import com.andyadc.bms.security.auth.ajax.AjaxLoginProcessingFilter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,10 +35,42 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private RestAuthenticationEntryPoint authenticationEntryPoint;
+    private AjaxAwareAuthenticationSuccessHandler authenticationSuccessHandler;
+    private AjaxAwareAuthenticationFailureHandler authenticationFailureHandler;
+
+    private AuthenticationManager authenticationManager;
+
+    private ObjectMapper objectMapper;
 
     @Autowired
     public void setAuthenticationEntryPoint(RestAuthenticationEntryPoint authenticationEntryPoint) {
         this.authenticationEntryPoint = authenticationEntryPoint;
+    }
+
+    @Autowired
+    public void setAuthenticationSuccessHandler(AjaxAwareAuthenticationSuccessHandler authenticationSuccessHandler) {
+        this.authenticationSuccessHandler = authenticationSuccessHandler;
+    }
+
+    @Autowired
+    public void setAuthenticationFailureHandler(AjaxAwareAuthenticationFailureHandler authenticationFailureHandler) {
+        this.authenticationFailureHandler = authenticationFailureHandler;
+    }
+
+    @Autowired
+    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
+
+    @Autowired
+    public void setObjectMapper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
+    protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter(String loginEntryPoint) throws Exception {
+        AjaxLoginProcessingFilter filter = new AjaxLoginProcessingFilter(loginEntryPoint, authenticationSuccessHandler, authenticationFailureHandler, objectMapper);
+        filter.setAuthenticationManager(this.authenticationManager);
+        return filter;
     }
 
     @Override
@@ -58,7 +96,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .addFilterBefore(new CustomCorsFilter(), UsernamePasswordAuthenticationFilter.class)
-
+                .addFilterBefore(buildAjaxLoginProcessingFilter(AUTHENTICATION_URL), UsernamePasswordAuthenticationFilter.class)
 
         ;
     }
@@ -68,9 +106,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         super.configure(auth);
     }
 
-//    @Bean
-//    @Override
-//    public AuthenticationManager authenticationManagerBean() throws Exception {
-//        return super.authenticationManagerBean();
-//    }
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 }

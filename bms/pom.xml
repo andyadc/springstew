@@ -15,6 +15,7 @@
     <version>1.0.0</version>
 
     <properties>
+        <commons-lang.version>3.12.0</commons-lang.version>
         <jjwt.version>0.11.2</jjwt.version>
 
         <maven.compiler.source>8</maven.compiler.source>
@@ -39,6 +40,11 @@
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
             <version>1.68</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang.version}</version>
         </dependency>
 
         <!-- jwt -->
