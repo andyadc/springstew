@@ -2,9 +2,11 @@ package com.andyadc.bms.security.config;
 
 import com.andyadc.bms.security.CustomCorsFilter;
 import com.andyadc.bms.security.RestAuthenticationEntryPoint;
+import com.andyadc.bms.security.auth.ajax.AjaxAuthenticationProvider;
 import com.andyadc.bms.security.auth.ajax.AjaxAwareAuthenticationFailureHandler;
 import com.andyadc.bms.security.auth.ajax.AjaxAwareAuthenticationSuccessHandler;
 import com.andyadc.bms.security.auth.ajax.AjaxLoginProcessingFilter;
+import com.andyadc.bms.security.auth.jwt.JwtAuthenticationProvider;
 import com.andyadc.bms.security.auth.jwt.JwtTokenAuthenticationProcessingFilter;
 import com.andyadc.bms.security.auth.jwt.SkipPathRequestMatcher;
 import com.andyadc.bms.security.auth.jwt.extractor.TokenExtractor;
@@ -41,6 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private AjaxAwareAuthenticationSuccessHandler authenticationSuccessHandler;
     private AjaxAwareAuthenticationFailureHandler authenticationFailureHandler;
 
+    private AjaxAuthenticationProvider ajaxAuthenticationProvider;
+    private JwtAuthenticationProvider jwtAuthenticationProvider;
+
     private AuthenticationManager authenticationManager;
 
     private TokenExtractor tokenExtractor;
@@ -59,6 +64,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void setAuthenticationFailureHandler(AjaxAwareAuthenticationFailureHandler authenticationFailureHandler) {
         this.authenticationFailureHandler = authenticationFailureHandler;
+    }
+
+    @Autowired
+    public void setJwtAuthenticationProvider(JwtAuthenticationProvider jwtAuthenticationProvider) {
+        this.jwtAuthenticationProvider = jwtAuthenticationProvider;
+    }
+
+    @Autowired
+    public void setAjaxAuthenticationProvider(AjaxAuthenticationProvider ajaxAuthenticationProvider) {
+        this.ajaxAuthenticationProvider = ajaxAuthenticationProvider;
     }
 
     @Autowired
@@ -114,13 +129,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(new CustomCorsFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(buildAjaxLoginProcessingFilter(AUTHENTICATION_URL), UsernamePasswordAuthenticationFilter.class)
-
+                .addFilterBefore(buildJwtTokenAuthenticationProcessingFilter(permitAllEndpointList, API_ROOT_URL), UsernamePasswordAuthenticationFilter.class)
         ;
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
+        auth.authenticationProvider(ajaxAuthenticationProvider);
+        auth.authenticationProvider(jwtAuthenticationProvider);
     }
 
     @Bean
