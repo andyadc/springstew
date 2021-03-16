@@ -3,25 +3,32 @@ package com.andyadc.bms.security.auth.ajax;
 import com.andyadc.bms.entity.User;
 import com.andyadc.bms.security.UserService;
 import com.andyadc.bms.security.data.DatabaseUserService;
+import com.andyadc.bms.security.model.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class AjaxAuthenticationProvider implements AuthenticationProvider {
 
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final UserService userService;
 
     @Autowired
-    public AjaxAuthenticationProvider(BCryptPasswordEncoder passwordEncoder, DatabaseUserService userService) {
+    public AjaxAuthenticationProvider(PasswordEncoder passwordEncoder, DatabaseUserService userService) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
     }
@@ -39,7 +46,14 @@ public class AjaxAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException("Authentication Failed. Username or Password not valid.");
         }
 
-        return null;
+        if (user.getAuthorities() == null) {
+            throw new InsufficientAuthenticationException("User has no authorities assigned");
+        }
+
+        List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+
+        UserContext context = UserContext.create(username, grantedAuthorities);
+        return new UsernamePasswordAuthenticationToken(context, null, grantedAuthorities);
     }
 
     @Override

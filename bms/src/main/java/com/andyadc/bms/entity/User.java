@@ -1,10 +1,14 @@
 package com.andyadc.bms.entity;
 
+import java.util.List;
+
 public class User {
 
     private Long id;
     private String username;
     private String password;
+
+    private List<String> authorities;
 
     public Long getId() {
         return id;
@@ -28,5 +32,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<String> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<String> authorities) {
+        this.authorities = authorities;
     }
 }

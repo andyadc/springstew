@@ -1,7 +1,12 @@
 package com.andyadc.bms.security.model.token;
 
 import com.andyadc.bms.security.exception.JwtExpiredTokenException;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,8 +26,8 @@ public class RawAccessJwtToken implements JwtToken {
      */
     public Jws<Claims> parseClaims(String signingKey) {
         try {
-            return Jwts.parser().setSigningKey(signingKey).parseClaimsJws(this.token);
-        } catch (UnsupportedJwtException | MalformedJwtException | IllegalArgumentException | SignatureException ex) {
+            return Jwts.parserBuilder().setSigningKey(signingKey).build().parseClaimsJws(this.token);
+        } catch (UnsupportedJwtException | MalformedJwtException | IllegalArgumentException | SecurityException ex) {
             logger.error("Invalid JWT Token", ex);
             throw new BadCredentialsException("Invalid JWT token: ", ex);
         } catch (ExpiredJwtException expiredEx) {
