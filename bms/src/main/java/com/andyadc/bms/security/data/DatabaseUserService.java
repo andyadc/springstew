@@ -45,15 +45,6 @@ public class DatabaseUserService implements UserService {
     //TODO
     @Override
     public Optional<User> findByUsername(String username) {
-//        User user = new User();
-//        user.setUsername(username);
-//        user.setPassword(username);
-//
-//        List<String> authorities = new ArrayList<>();
-//        authorities.add("user:add");
-//        authorities.add("user:del");
-//        authorities.add("user:update");
-//        user.setAuthorities(authorities);
         User user = userMap.get(username);
 
         return Optional.of(user);
