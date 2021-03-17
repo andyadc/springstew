@@ -10,6 +10,15 @@ public class User {
 
     private List<String> authorities;
 
+    public User() {
+    }
+
+    public User(Long id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }
