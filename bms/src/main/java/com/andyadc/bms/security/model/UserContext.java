@@ -7,11 +7,13 @@ import java.util.List;
 
 public class UserContext {
     private final String username;
+    private final long timestamp;
     private final List<GrantedAuthority> authorities;
 
     private UserContext(String username, List<GrantedAuthority> authorities) {
         this.username = username;
         this.authorities = authorities;
+        this.timestamp = System.currentTimeMillis();
     }
 
     public static UserContext create(String username, List<GrantedAuthority> authorities) {
@@ -21,6 +23,10 @@ public class UserContext {
 
     public String getUsername() {
         return username;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
     }
 
     public List<GrantedAuthority> getAuthorities() {
