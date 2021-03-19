@@ -22,10 +22,12 @@ import java.util.stream.Collectors;
 @Component
 public class JwtTokenFactory {
     private final JwtSettings settings;
+    private final Key key;
 
     @Autowired
     public JwtTokenFactory(JwtSettings settings) {
         this.settings = settings;
+        key = new SecretKeySpec(settings.getTokenSigningKey().getBytes(), SignatureAlgorithm.HS512.getJcaName());
     }
 
     /**
@@ -43,7 +45,7 @@ public class JwtTokenFactory {
 
         LocalDateTime currentTime = LocalDateTime.now();
 
-        Key key = new SecretKeySpec(settings.getTokenSigningKey().getBytes(), SignatureAlgorithm.HS512.getJcaName());
+//        Key key = new SecretKeySpec(settings.getTokenSigningKey().getBytes(), SignatureAlgorithm.HS512.getJcaName());
 
         String token = Jwts.builder()
                 .setClaims(claims)
@@ -78,7 +80,8 @@ public class JwtTokenFactory {
                 .setExpiration(Date.from(currentTime
                         .plusMinutes(settings.getRefreshTokenExpTime())
                         .atZone(ZoneId.systemDefault()).toInstant()))
-                .signWith(SignatureAlgorithm.HS512, settings.getTokenSigningKey())
+//                .signWith(SignatureAlgorithm.HS512, settings.getTokenSigningKey())
+                .signWith(key)
                 .compact();
 
         return new AccessJwtToken(token, claims);
