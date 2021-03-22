@@ -18,6 +18,7 @@ public class AuthMenu {
     private String createTime;
     private String updateTime;
     private Integer version;
+    private String memo;
 
     public AuthMenu() {
     }
@@ -148,5 +149,13 @@ public class AuthMenu {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }
