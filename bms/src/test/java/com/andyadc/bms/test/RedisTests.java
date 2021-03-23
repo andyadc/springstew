@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @SpringBootTest
 public class RedisTests {
@@ -19,6 +20,12 @@ public class RedisTests {
     private RedisTemplate<String, Object> redisTemplate;
     @Resource
     private RedisOperator redisOperator;
+
+    @Test
+    public void testScanKeys() {
+        Set<String> keys = redisOperator.keys("a*", 100L);
+        System.out.println(keys);
+    }
 
     @Test
     public void testRedisTemplate() {
