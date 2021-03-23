@@ -16,6 +16,7 @@ public class MapperTests {
     @Resource
     private ObjectMapper objectMapper;
 
+
     @Test
     public void testAuthUserMapper() throws Exception {
         AuthUser user = authUserMapper.findByUsername("twwx62u");
