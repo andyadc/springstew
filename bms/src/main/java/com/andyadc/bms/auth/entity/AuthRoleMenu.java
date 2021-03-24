@@ -1,8 +1,5 @@
 package com.andyadc.bms.auth.entity;
 
-import org.springframework.data.relational.core.mapping.Table;
-
-@Table("auth_role_user")
 public class AuthRoleMenu {
 
     private Long id;

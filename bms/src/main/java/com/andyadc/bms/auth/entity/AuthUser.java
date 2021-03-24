@@ -1,12 +1,7 @@
 package com.andyadc.bms.auth.entity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
-
-@Table("auth_user")
 public class AuthUser {
 
-    @Id
     private Long id;
     private String username;
     private String nickname;
