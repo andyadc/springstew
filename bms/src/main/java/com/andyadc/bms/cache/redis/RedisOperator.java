@@ -14,14 +14,16 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked"})
 @Component
 public class RedisOperator {
     private static final Logger logger = LoggerFactory.getLogger(RedisOperator.class);
@@ -37,23 +39,29 @@ public class RedisOperator {
     }
 
     /**
+     * by command `scan`
+     *
      * @param pattern key, like *key*
      * @param count   scan key number, not result size
      */
     public Set<String> keys(String pattern, long count) {
-        ScanOptions options = ScanOptions.scanOptions().match(pattern).count(count).build();
-
         return redisTemplate.execute(new RedisCallback<Set<String>>() {
             @Override
-            public Set<String> doInRedis(RedisConnection redisConnection) throws DataAccessException {
+            public Set<String> doInRedis(RedisConnection connection) throws DataAccessException {
+                ScanOptions options = ScanOptions.scanOptions().match(pattern).count(count).build();
                 Set<String> set = new HashSet<>();
-                Cursor<byte[]> cursor = redisConnection.scan(options);
+                Cursor<byte[]> cursor = connection.scan(options);
                 while (cursor.hasNext()) {
                     set.add(new String(cursor.next()));
                 }
                 return set;
             }
         });
+    }
+
+    public boolean exist(String key) {
+        Long count = redisTemplate.countExistingKeys(Collections.singletonList(key));
+        return count != null && count > 0L;
     }
 
     public boolean expire(String key, long timeout, TimeUnit unit) {
@@ -67,15 +75,7 @@ public class RedisOperator {
     }
 
     public boolean del(String... keys) {
-        try {
-            if (keys != null) {
-                redisTemplate.delete(Arrays.asList(keys));
-                return true;
-            }
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        }
-        return false;
+        return this.del(Arrays.asList(keys));
     }
 
     public boolean del(List<String> keys) {
@@ -113,9 +113,9 @@ public class RedisOperator {
     public void batctSet(Map<String, Object> kvs) {
         redisTemplate.executePipelined(new RedisCallback<Object>() {
             @Override
-            public Object doInRedis(RedisConnection redisConnection) throws DataAccessException {
+            public Object doInRedis(RedisConnection connection) throws DataAccessException {
                 kvs.forEach((k, v) -> {
-                    redisConnection.set(keySerializer.serialize(k), valueSerializer.serialize(v));
+                    connection.set(Objects.requireNonNull(keySerializer.serialize(k)), Objects.requireNonNull(valueSerializer.serialize(v)));
                 });
                 return null;
             }
@@ -133,9 +133,9 @@ public class RedisOperator {
         return result;
     }
 
-    public boolean hset(String key, Map<String, Object> map) {
+    public boolean hset(String key, Map<String, Object> hmap) {
         try {
-            redisTemplate.opsForHash().putAll(key, map);
+            redisTemplate.opsForHash().putAll(key, hmap);
             return true;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -143,9 +143,9 @@ public class RedisOperator {
         return false;
     }
 
-    public boolean hset(String key, String item, Object value) {
+    public boolean hset(String key, String hkey, Object value) {
         try {
-            redisTemplate.opsForHash().put(key, item, value);
+            redisTemplate.opsForHash().put(key, hkey, value);
             return true;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -153,7 +153,7 @@ public class RedisOperator {
         return false;
     }
 
-    public Object hget(String key, String item) {
-        return redisTemplate.opsForHash().get(key, item);
+    public Object hget(String key, String hkey) {
+        return redisTemplate.opsForHash().get(key, hkey);
     }
 }

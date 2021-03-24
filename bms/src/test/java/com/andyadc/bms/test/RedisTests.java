@@ -22,6 +22,11 @@ public class RedisTests {
     private RedisOperator redisOperator;
 
     @Test
+    public void testExist() {
+        System.out.println(redisOperator.exist("a"));
+    }
+
+    @Test
     public void testScanKeys() {
         Set<String> keys = redisOperator.keys("a*", 100L);
         System.out.println(keys);
