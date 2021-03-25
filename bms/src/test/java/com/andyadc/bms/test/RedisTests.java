@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 public class RedisTests {
@@ -20,6 +21,20 @@ public class RedisTests {
     private RedisTemplate<String, Object> redisTemplate;
     @Resource
     private RedisOperator redisOperator;
+
+    @Test
+    public void testMQ() {
+        for (int i = 0; i < 10; i++) {
+            redisTemplate.opsForList().leftPush("task", "data-" + i);
+        }
+        Object task = redisTemplate.opsForList().rightPop("task");
+        System.out.println(">>> " + task);
+    }
+
+    @Test
+    public void testExpire() {
+        System.out.println(redisOperator.expire("a", 60, TimeUnit.SECONDS));
+    }
 
     @Test
     public void testExist() {
