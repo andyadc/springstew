@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 
 @SpringBootTest
 public class MapperTests {
@@ -19,6 +20,19 @@ public class MapperTests {
     private ObjectMapper objectMapper;
     @Resource
     private AuthMapper authMapper;
+
+    @Test
+    public void testInsertUpdateUser() {
+        AuthUser user = new AuthUser();
+        user.setUsername("qq");
+        user.setPassword("rtegrfd");
+        user.setStatus(1);
+        user.setDeleted(0);
+        user.setType(1);
+        user.setCreateTime(LocalDateTime.now());
+        user.setUpdateTime(LocalDateTime.now());
+        authMapper.insertUserSelective(user);
+    }
 
     @Test
     public void testAuthMapper() {

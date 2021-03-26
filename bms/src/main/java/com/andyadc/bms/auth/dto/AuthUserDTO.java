@@ -1,13 +1,23 @@
 package com.andyadc.bms.auth.dto;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 public class AuthUserDTO {
 
     private Long id;
+
+    @Length(min = 3, max = 15)
+    @NotBlank
     private String username;
+
+    @Length(min = 6, max = 18)
+    @NotBlank
     private String password;
     private Integer status;
+
     private List<String> authorities;
 
     public Long getId() {

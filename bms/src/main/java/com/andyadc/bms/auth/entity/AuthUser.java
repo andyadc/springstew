@@ -1,5 +1,7 @@
 package com.andyadc.bms.auth.entity;
 
+import java.time.LocalDateTime;
+
 public class AuthUser {
 
     private Long id;
@@ -12,9 +14,10 @@ public class AuthUser {
     private Integer type;
     private Integer status;
     private Integer deleted;
-    private String createTime;
-    private String updateTime;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
     private Integer version;
+    private String memo;
 
     public AuthUser() {
     }
@@ -99,19 +102,19 @@ public class AuthUser {
         this.deleted = deleted;
     }
 
-    public String getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
-    public String getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -121,5 +124,13 @@ public class AuthUser {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }

@@ -1,5 +1,7 @@
 package com.andyadc.bms.auth.entity;
 
+import java.time.LocalDateTime;
+
 public class AuthMenu {
 
     private Long id;
@@ -15,8 +17,8 @@ public class AuthMenu {
     private Integer seq;
     private Integer visible;
     private Integer status;
-    private String createTime;
-    private String updateTime;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
     private Integer version;
     private String memo;
 
@@ -127,19 +129,19 @@ public class AuthMenu {
         this.status = status;
     }
 
-    public String getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
-    public String getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 
