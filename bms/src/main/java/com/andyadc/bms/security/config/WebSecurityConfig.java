@@ -39,6 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     static {
         permitAllEndpointList.add(AUTHENTICATION_URL);
         permitAllEndpointList.add(REFRESH_TOKEN_URL);
+        permitAllEndpointList.add("/api/auth/register");
     }
 
     private RestAuthenticationEntryPoint authenticationEntryPoint;
