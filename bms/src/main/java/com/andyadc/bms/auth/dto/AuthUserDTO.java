@@ -16,6 +16,8 @@ public class AuthUserDTO {
     @Length(min = 6, max = 18)
     @NotBlank
     private String password;
+    private String confirmPassword;
+
     private Integer status;
 
     private List<String> authorities;
@@ -51,6 +53,14 @@ public class AuthUserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public Integer getStatus() {
