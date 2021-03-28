@@ -20,6 +20,15 @@ public class AuthUserDTO {
 
     private List<String> authorities;
 
+    public AuthUserDTO() {
+    }
+
+    public AuthUserDTO(Long id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }

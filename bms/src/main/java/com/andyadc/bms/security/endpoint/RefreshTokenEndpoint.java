@@ -1,7 +1,7 @@
 package com.andyadc.bms.security.endpoint;
 
-import com.andyadc.bms.entity.User;
-import com.andyadc.bms.security.UserService;
+import com.andyadc.bms.auth.dto.AuthUserDTO;
+import com.andyadc.bms.security.SecurityService;
 import com.andyadc.bms.security.auth.jwt.extractor.TokenExtractor;
 import com.andyadc.bms.security.auth.jwt.verifier.TokenVerifier;
 import com.andyadc.bms.security.config.JwtSettings;
@@ -35,7 +35,7 @@ public class RefreshTokenEndpoint {
 
     private JwtTokenFactory tokenFactory;
     private JwtSettings jwtSettings;
-    private UserService userService;
+    private SecurityService securityService;
     private TokenVerifier tokenVerifier;
     private TokenExtractor tokenExtractor;
 
@@ -53,7 +53,7 @@ public class RefreshTokenEndpoint {
         }
 
         String subject = refreshToken.getSubject();
-        User user = userService.findByUsername(subject).orElseThrow(() -> new UsernameNotFoundException("User not found: " + subject));
+        AuthUserDTO user = securityService.findByUsername(subject).orElseThrow(() -> new UsernameNotFoundException("User not found: " + subject));
 
         if (user.getAuthorities() == null) throw new InsufficientAuthenticationException("User has no roles assigned");
 
@@ -76,11 +76,6 @@ public class RefreshTokenEndpoint {
     }
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired
     public void setTokenVerifier(TokenVerifier tokenVerifier) {
         this.tokenVerifier = tokenVerifier;
     }
@@ -88,5 +83,10 @@ public class RefreshTokenEndpoint {
     @Autowired
     public void setTokenExtractor(TokenExtractor tokenExtractor) {
         this.tokenExtractor = tokenExtractor;
+    }
+
+    @Autowired
+    public void setSecurityService(SecurityService securityService) {
+        this.securityService = securityService;
     }
 }

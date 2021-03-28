@@ -1,17 +1,13 @@
 package com.andyadc.bms.test;
 
+import com.andyadc.bms.auth.dto.AuthUserDTO;
 import com.andyadc.bms.cache.redis.RedisOperator;
-import com.andyadc.bms.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
@@ -49,7 +45,7 @@ public class RedisTests {
 
     @Test
     public void testRedisTemplate() {
-        redisTemplate.opsForValue().set("u1", new User());
+        redisTemplate.opsForValue().set("u1", new AuthUserDTO());
         System.out.println(redisTemplate.opsForValue().get("u1"));
     }
 
@@ -67,9 +63,9 @@ public class RedisTests {
     @Test
     public void testPipeline() {
         Map<String, Object> map = new HashMap<>();
-        map.put("a1", new User(1L, "a1", "aaaaaa"));
-        map.put("a2", new User(2L, "a2", "bbbbbb"));
-        map.put("a3", new User(3L, "a3", "vvvvvv"));
+        map.put("a1", new AuthUserDTO(1L, "a1", "aaaaaa"));
+        map.put("a2", new AuthUserDTO(2L, "a2", "bbbbbb"));
+        map.put("a3", new AuthUserDTO(3L, "a3", "vvvvvv"));
         redisOperator.batctSet(map);
     }
 }
