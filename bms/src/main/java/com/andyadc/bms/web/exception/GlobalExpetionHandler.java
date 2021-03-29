@@ -9,6 +9,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 @RestControllerAdvice
 public class GlobalExpetionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExpetionHandler.class);
@@ -20,6 +22,14 @@ public class GlobalExpetionHandler {
 
         String defaultMessage = e.getBindingResult().getAllErrors().get(0).getDefaultMessage();
 
-        return ResponseEntity.ok(new Response<>("400", defaultMessage));
+        return ResponseEntity.ok(Response.of("400", defaultMessage));
+    }
+
+    @ExceptionHandler(value = {SQLIntegrityConstraintViolationException.class})
+    public ResponseEntity<Object> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException e) {
+        String stackTraceAsString = Throwables.getStackTraceAsString(e);
+        logger.error(stackTraceAsString);
+
+        return ResponseEntity.ok(Response.of("400", "数据重复"));
     }
 }

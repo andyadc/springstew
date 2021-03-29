@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 
 public class Response<T> {
 
+    private final LocalDateTime timestamp;
     private Integer status;
     private String code;
     private String message;
-    private final LocalDateTime timestamp;
     private T data;
 
     public Response() {
@@ -18,6 +18,10 @@ public class Response<T> {
         this();
         this.code = code;
         this.message = message;
+    }
+
+    public static Response<?> of(String code, String message) {
+        return new Response<>(code, message);
     }
 
     public Integer getStatus() {
