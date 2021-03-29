@@ -7,7 +7,7 @@ public class Response<T> {
     private Integer status;
     private String code;
     private String message;
-    private LocalDateTime timestamp;
+    private final LocalDateTime timestamp;
     private T data;
 
     public Response() {
@@ -15,6 +15,7 @@ public class Response<T> {
     }
 
     public Response(String code, String message) {
+        this();
         this.code = code;
         this.message = message;
     }
