@@ -9,11 +9,11 @@ public class AuthUserDTO {
 
     private Long id;
 
-    @Length(min = 3, max = 15)
+    @Length(min = 3, max = 15, message = "用户名长度必须在3到15位之间")
     @NotBlank
     private String username;
 
-    @Length(min = 6, max = 18)
+    @Length(min = 6, max = 18, message = "密码长度必须在6到18位之间")
     @NotBlank
     private String password;
     private String confirmPassword;
