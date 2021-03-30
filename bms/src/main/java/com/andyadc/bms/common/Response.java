@@ -20,6 +20,11 @@ public class Response<T> {
         this.message = message;
     }
 
+    public Response(String code, String message, T data) {
+        this(code, message);
+        this.data = data;
+    }
+
     public static Response<?> of(String code, String message) {
         return new Response<>(code, message);
     }

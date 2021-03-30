@@ -6,6 +6,8 @@ import com.andyadc.bms.auth.entity.AuthUser;
 import com.andyadc.bms.auth.mapper.AuthMapper;
 import com.andyadc.bms.auth.mapper.AuthUserMapper;
 import com.andyadc.bms.security.PasswordService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 @Service
 public class AuthUserService {
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthUserService.class);
     private AuthMapper authMapper;
     private AuthUserMapper userMapper;
     private PasswordService passwordService;
@@ -23,6 +26,7 @@ public class AuthUserService {
     public AuthUserDTO findByUsername(String username) {
         AuthUser authUser = userMapper.findByUsername(username);
         if (authUser == null) {
+            logger.error("Cannot find auth user, username - [{}]", username);
             return null;
         }
 

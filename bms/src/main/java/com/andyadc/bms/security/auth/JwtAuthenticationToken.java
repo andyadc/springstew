@@ -2,8 +2,6 @@ package com.andyadc.bms.security.auth;
 
 import com.andyadc.bms.security.model.UserContext;
 import com.andyadc.bms.security.model.token.RawAccessJwtToken;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -14,7 +12,6 @@ import java.util.Collection;
  * that is designed for simple presentation of JwtToken.
  */
 public class JwtAuthenticationToken extends AbstractAuthenticationToken {
-    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationToken.class);
 
     private RawAccessJwtToken rawAccessToken;
     private UserContext userContext;
