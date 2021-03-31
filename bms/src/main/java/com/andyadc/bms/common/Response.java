@@ -25,8 +25,20 @@ public class Response<T> {
         this.data = data;
     }
 
-    public static Response<?> of(String code, String message) {
+    public static <T> Response<T> of(String code, String message) {
         return new Response<>(code, message);
+    }
+
+    public static <T> Response<T> of(String code, String message, T t) {
+        return new Response<>(code, message, t);
+    }
+
+    public static <T> Response<T> of(RespCode respCode) {
+        return of(respCode.getCode(), respCode.getMessage());
+    }
+
+    public static <T> Response<T> of(RespCode respCode, T t) {
+        return of(respCode.getCode(), respCode.getMessage(), t);
     }
 
     public Integer getStatus() {

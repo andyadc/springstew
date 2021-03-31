@@ -1,5 +1,6 @@
 package com.andyadc.bms.security.auth.ajax;
 
+import com.andyadc.bms.common.RespCode;
 import com.andyadc.bms.common.Response;
 import com.andyadc.bms.security.model.UserContext;
 import com.andyadc.bms.security.model.token.JwtToken;
@@ -44,11 +45,9 @@ public class AjaxAwareAuthenticationSuccessHandler implements AuthenticationSucc
         tokenMap.put("token", accessToken.getToken());
         tokenMap.put("refreshToken", refreshToken.getToken());
 
-        Response<Object> resp = new Response<>("000", "Success", tokenMap);
-
         response.setStatus(HttpStatus.OK.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        mapper.writeValue(response.getWriter(), resp);
+        mapper.writeValue(response.getWriter(), Response.of(RespCode.SUCC, tokenMap));
 
         clearAuthenticationAttributes(request);
     }
