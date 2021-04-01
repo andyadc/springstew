@@ -2,21 +2,37 @@ package com.andyadc.bms.test;
 
 import com.andyadc.bms.auth.dto.AuthUserDTO;
 import com.andyadc.bms.cache.redis.RedisOperator;
+import com.andyadc.bms.common.Constants;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 public class RedisTests {
 
     @Resource
+    private ObjectMapper objectMapper;
+    @Resource
     private RedisTemplate<String, Object> redisTemplate;
     @Resource
     private RedisOperator redisOperator;
+
+    @Test
+    public void testGet() {
+        Object o = redisOperator.get(Constants.REDIS_CACHE_PREFIX + "auth:user:" + "adc");
+        System.out.println(o);
+        AuthUserDTO dto = objectMapper.convertValue(o, AuthUserDTO.class);
+        System.out.println(dto);
+    }
 
     @Test
     public void testMQ() {
