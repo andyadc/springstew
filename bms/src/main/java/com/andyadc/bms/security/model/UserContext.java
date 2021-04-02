@@ -3,9 +3,10 @@ package com.andyadc.bms.security.model;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class UserContext {
+public class UserContext implements Serializable {
     private final String username;
     private final long timestamp;
     private final List<GrantedAuthority> authorities;

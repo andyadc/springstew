@@ -3,7 +3,9 @@ package com.andyadc.bms.security.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class LoginRequest {
+import java.io.Serializable;
+
+public class LoginRequest implements Serializable {
 
     private final String username;
     private final String password;
