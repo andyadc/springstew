@@ -1,5 +1,7 @@
 package com.andyadc.bms.web;
 
+import com.andyadc.bms.common.RespCode;
+import com.andyadc.bms.common.Response;
 import com.andyadc.bms.file.FileStorageDTO;
 import com.andyadc.bms.file.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,6 @@ public class UploadController {
         }
 
         FileStorageDTO store = fileStorageService.store(file);
-        return ResponseEntity.ok(store);
+        return ResponseEntity.ok(Response.of(RespCode.SUCC, store));
     }
 }
