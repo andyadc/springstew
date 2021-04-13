@@ -21,7 +21,6 @@
         <module>spring-boot-data</module>
         <module>log</module>
         <module>security</module>
-        <module>bms</module>
     </modules>
 
 </project>
