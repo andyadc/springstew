@@ -26,6 +26,7 @@
         <module>jpa</module>
         <module>jdbc</module>
         <module>mybatis</module>
+        <module>abatis</module>
     </modules>
 
 </project>
