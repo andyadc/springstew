@@ -10,6 +10,6 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
 
     @Override
     public SqlSession openSession() {
-        return null;
+        return new DefaultSqlSession(configuration.connection, configuration.mapperElement);
     }
 }
