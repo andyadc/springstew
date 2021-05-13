@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class DefaultSqlSession implements SqlSession {
         this.mapperElement = mapperElement;
     }
 
+    // TODO
     private <T> List<T> resultSet2Obj(ResultSet resultSet, Class<?> clazz) {
         List<T> list = new ArrayList<>();
         try {
@@ -31,17 +33,20 @@ public class DefaultSqlSession implements SqlSession {
             // 每次遍历行值
             while (resultSet.next()) {
                 T obj = (T) clazz.newInstance();
-                for (int i = 0; i < columnCount; i++) {
+                for (int i = 1; i <= columnCount; i++) {
                     Object value = resultSet.getObject(i);
                     String columnName = metaData.getColumnName(i);
                     String setMethod = "set" + columnName.substring(0, 1).toUpperCase() + columnName.substring(1);
                     Method method;
                     if (value instanceof Timestamp) {
                         method = clazz.getMethod(setMethod, Date.class);
+                    } else if (value instanceof LocalDateTime) {
+                        // TODO
+                        continue;
                     } else {
                         method = clazz.getMethod(setMethod, value.getClass());
                     }
-                    method.invoke(obj, method);
+                    method.invoke(obj, value);
                 }
                 list.add(obj);
             }
@@ -57,21 +62,21 @@ public class DefaultSqlSession implements SqlSession {
         int size = parameterMap.size();
 
         if (parameter instanceof Long) {
-            for (int i = 0; i < size; i++) {
+            for (int i = 1; i <= size; i++) {
                 preparedStatement.setLong(i, Long.parseLong(parameter.toString()));
             }
             return;
         }
 
         if (parameter instanceof Integer) {
-            for (int i = 0; i < size; i++) {
+            for (int i = 1; i <= size; i++) {
                 preparedStatement.setLong(i, Integer.parseInt(parameter.toString()));
             }
             return;
         }
 
         if (parameter instanceof String) {
-            for (int i = 0; i < size; i++) {
+            for (int i = 1; i <= size; i++) {
                 preparedStatement.setString(i, parameter.toString());
             }
             return;

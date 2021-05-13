@@ -77,8 +77,8 @@ public class SqlSessionFactoryBuilder {
                     for (Node sn : selectNodes) {
                         Element element = (Element) sn;
                         String id = element.attributeValue("id");
-                        String parameterType = node.attributeValue("parameterType");
-                        String resultType = node.attributeValue("resultType");
+                        String parameterType = element.attributeValue("parameterType");
+                        String resultType = element.attributeValue("resultType");
                         String sql = element.getText();
 
                         Map<Integer, String> parameter = new HashMap<>();
