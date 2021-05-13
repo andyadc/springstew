@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:component-scan base-package="com.andyadc.abatis"/>
+
+    <aop:aspectj-autoproxy/>
+
+    <bean id="sqlSessionFactory" class="com.andyadc.abatis.spring.SqlSessionFactoryBean">
+        <property name="resource" value="abatis-config.xml"/>
+    </bean>
+
+    <bean class="com.andyadc.abatis.spring.MapperScannerConfigurer">
+        <property name="basePackage" value="com.andyadc.abatis.spring.test"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+</beans>

@@ -13,7 +13,7 @@ public class DataTest {
 
     @Test
     public void testXMLReader() throws Exception {
-        String resource = "abatis-config-datasource.xml";
+        String resource = "abatis-config.xml";
         Reader reader = Resources.getResourceAsReader(resource);
 
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);

@@ -27,6 +27,7 @@
         <module>jdbc</module>
         <module>mybatis</module>
         <module>abatis</module>
+        <module>abatis-spring</module>
     </modules>
 
 </project>
