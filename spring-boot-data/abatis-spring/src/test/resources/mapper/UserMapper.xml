@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.andyadc.abatis.test.UserMapper">
+<mapper namespace="com.andyadc.abatis.spring.test.mapper.UserMapper">
 
     <select id="selectDBDate" resultType="java.lang.String">
         SELECT NOW()
     </select>
 
-    <select id="selectByName" resultType="com.andyadc.abatis.test.User">
+    <select id="selectByName" resultType="com.andyadc.abatis.spring.test.User">
         select * from user where username = #{username}
     </select>
 
