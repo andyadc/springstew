@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 public class SqlSessionFactoryBuilder {
 
     // {name}
-    private static final Pattern pattern = Pattern.compile("(#\\{(.*?)})");
+    protected static final Pattern pattern = Pattern.compile("(#\\{(.*?)})");
 
     public DefaultSqlSessionFactory build(Reader reader) {
         SAXReader saxReader = new SAXReader();

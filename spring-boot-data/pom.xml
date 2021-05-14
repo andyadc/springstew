@@ -28,6 +28,7 @@
         <module>mybatis</module>
         <module>abatis</module>
         <module>abatis-spring</module>
+        <module>abatis-spring-boot-starter</module>
     </modules>
 
 </project>

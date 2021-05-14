@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class DataTest {
+public class TestTest {
 
     @Test
-    public void testXml() {
+    public void testAbatisSpringByXml() {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
         UserMapper userMapper = applicationContext.getBean("userMapper", UserMapper.class);
         User user = userMapper.selectByName("a1");

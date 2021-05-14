@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.Reader;
 
-public class DataTest {
+public class TestTest {
 
     @Test
-    public void testXMLReader() throws Exception {
+    public void testAbatisQuery() throws Exception {
         String resource = "abatis-config.xml";
         Reader reader = Resources.getResourceAsReader(resource);
 
