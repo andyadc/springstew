@@ -1,4 +1,4 @@
-package com.andyadc.abatis.spring.boot.test;
+package com.andyadc.abatis.spring.boot.test.test;
 
 import org.springframework.boot.test.context.SpringBootTest;
 

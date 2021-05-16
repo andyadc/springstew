@@ -1,0 +1,6 @@
+abatis:
+  config:
+    driver: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://www.qq-server.com:3307/idea?useSSL=false&amp;serverTimezone=GMT%2B8&amp;useUnicode=true&amp;characterEncoding=utf-8
+    username: root
+    password: andyadC7,./!
