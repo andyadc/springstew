@@ -61,4 +61,16 @@ public class AbatisProperties {
     public void setBaseMapperPackage(String baseMapperPackage) {
         this.baseMapperPackage = baseMapperPackage;
     }
+
+    @Override
+    public String toString() {
+        return "AbatisProperties{" +
+                "driver=" + driver +
+                ", url=" + url +
+                ", username=" + username +
+                ", password=" + password +
+                ", mapperLocations=" + mapperLocations +
+                ", baseMapperPackage=" + baseMapperPackage +
+                '}';
+    }
 }
