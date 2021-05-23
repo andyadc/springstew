@@ -15,7 +15,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <spring.version>5.3.6</spring.version>
+        <spring.version>5.3.7</spring.version>
         <aspectj.version>1.9.6</aspectj.version>
     </properties>
 
@@ -55,7 +55,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.7.1</version>
+            <version>5.7.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
