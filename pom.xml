@@ -23,6 +23,7 @@
         <module>security</module>
         <module>spring-boot-data/abatis-spring-boot-starter-test</module>
         <module>echo</module>
+        <module>samples</module>
     </modules>
 
 </project>
