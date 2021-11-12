@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -19,6 +21,11 @@ public class CustomErrorController extends BasicErrorController {
 
     public CustomErrorController(ErrorAttributes errorAttributes, ServerProperties serverProperties) {
         super(errorAttributes, serverProperties.getError());
+    }
+
+    @Override
+    public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) {
+        return super.errorHtml(request, response);
     }
 
     @Override
