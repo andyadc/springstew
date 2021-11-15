@@ -1,4 +1,4 @@
-package com.andyadc.samples;
+package com.andyadc.samples.controller;
 
 import com.andyadc.samples.domain.AdvanceInfo;
 import com.andyadc.samples.domain.BasicInfo;

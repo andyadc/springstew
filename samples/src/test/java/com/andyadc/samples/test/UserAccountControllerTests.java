@@ -1,6 +1,6 @@
 package com.andyadc.samples.test;
 
-import com.andyadc.samples.UserAccountController;
+import com.andyadc.samples.controller.UserAccountController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

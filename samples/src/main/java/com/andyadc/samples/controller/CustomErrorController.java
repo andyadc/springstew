@@ -1,4 +1,4 @@
-package com.andyadc.samples;
+package com.andyadc.samples.controller;
 
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;

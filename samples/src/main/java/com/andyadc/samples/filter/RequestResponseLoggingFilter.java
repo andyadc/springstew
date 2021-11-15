@@ -1,4 +1,4 @@
-package com.andyadc.samples;
+package com.andyadc.samples.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.andyadc.samples;
+package com.andyadc.samples.listener;
 
 import org.springframework.stereotype.Component;
 
